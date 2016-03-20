@@ -1,0 +1,4 @@
+title: IE 10 隐藏域 placeholder BUG
+---
+
+input hidden 如果有 placeholder，它的默认 value 会是 placeholder。

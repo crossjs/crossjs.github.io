@@ -1,0 +1,10 @@
+menu:
+  # Home: /
+  # Archives: /archives
+
+# duoshuo comment
+duoshuo: true
+duoshuo_name: crossjs
+
+# google analytics
+googleTrackId: UA-58829495-1
