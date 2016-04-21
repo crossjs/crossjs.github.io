@@ -18,7 +18,7 @@ tags: [postcss, webpack]
 
 ## 在 webpack 中使用
 
-```js
+``` js
 webpackConfig = {
   module: {
     loaders: [
