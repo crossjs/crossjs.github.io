@@ -28,7 +28,7 @@ const setDarkMode = (): void => {
   }
 }
 
-const ThemeSwitch: React.FC<{}> = () => {
+const ThemeSwitch = () => {
   const [isDark, toggleDark] = useState(getTheme() === "dark")
   const changeTheme = () => {
     toggleDark(!isDark)

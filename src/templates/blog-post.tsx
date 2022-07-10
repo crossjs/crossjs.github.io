@@ -13,7 +13,6 @@ interface DataProps {
     siteMetadata: SiteMetadata
   }
   mdx: {
-    id: string
     excerpt: string
     body: string
     frontmatter: {
@@ -40,10 +39,10 @@ interface DataProps {
   }
 }
 
-const BlogPostTemplate: React.FC<PageProps<DataProps>> = ({
+const BlogPostTemplate = ({
   data,
   location,
-}) => {
+}: PageProps<DataProps>) => {
   const post = data.mdx
   const { previous, next } = data
 
@@ -112,13 +111,12 @@ export const pageQuery = graphql`
       }
     }
     mdx(id: { eq: $id }) {
-      id
       excerpt(pruneLength: 160)
       body
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
         description
+        date(fromNow: true)
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {

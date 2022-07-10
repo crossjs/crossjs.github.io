@@ -15,7 +15,7 @@ interface DataProps {
   }
 }
 
-const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }: PageProps<DataProps>) => {
+const BlogIndex = ({ data, location }: PageProps<DataProps>) => {
   const { nodes: posts } = data.allMdx
 
   if (posts.length === 0) {
@@ -74,16 +74,16 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: {order: DESC, fields: frontmatter___date}) {
       nodes {
-        excerpt
         fields {
           slug
         }
+        excerpt
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
           title
           description
+          date(fromNow: true)
         }
       }
     }

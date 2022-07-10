@@ -11,7 +11,7 @@ interface DataProps {
   }
 }
 
-const NotFoundPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
+const NotFoundPage = ({ data, location }: PageProps<DataProps>) => {
   return (
     <Layout location={location} title={data.site.siteMetadata.title}>
       <Seo title="404: Not Found" />
