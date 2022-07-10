@@ -56,7 +56,7 @@ const BlogPostTemplate: React.FC<PageProps<DataProps>> = ({
       <main>
         <article>
           <header>
-            <h1 className="mt-14 mb-7 h-8 text-4xl font-black leading-8">
+            <h1 className="mt-14 mb-7 text-4xl font-black">
               {post.frontmatter.title}
             </h1>
             <p className="mb-7 -mt-5 text-sm leading-7">

@@ -1,0 +1,57 @@
+---
+title: MutationObserver 深度监听节点添加
+date: "2022-07-10T07:38:20Z"
+description: "MutationObserver 监听不到嵌套子节点的添加"
+---
+
+Ref: https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver
+
+使用 MutationObserver 可以监听 DOM 树变化。
+
+比如，节点添加：
+
+```js
+new MutationObserver((mutations) => {
+  mutations.forEach(({ addedNodes }) => {
+    addedNodes.forEach((el) => {
+      console.log('Node added:', el);
+    });
+  });
+}).observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+```
+
+但是，上述代码“监听不到下述代码中子节点的添加”，如：
+
+```js
+const parent = document.createElement('div');
+
+parant.innerHTML = '<div class="child">Hello</div>';
+
+document.body.appenchChild(parent);
+```
+
+因为 `child` 节点在 `parent` 添加到 `body` 所在的 DOM 树之前，就已经添加到 `parent` 所对应的 DOM 树了，所以不会触发 mutation 事件。
+
+简单的解决方案，就是在每一个 DOM 添加事件回调中，查询所有的子孙节点，代码如下：
+
+```js
+new MutationObserver((mutations) => {
+  mutations.forEach(({ addedNodes }) => {
+    addedNodes.forEach((el) => {
+      console.log('Node added:', el);
+      // 查询所有子孙节点
+      el.querySelectorAll('*').forEach((_el) => {
+        console.log('Node added:', _el);
+      });
+    });
+  });
+}).observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+```
+
+P.S. 节点在 DOM 树内部移动，会先触发一次**节点移除**事件，再触发一次**节点添加**事件。
