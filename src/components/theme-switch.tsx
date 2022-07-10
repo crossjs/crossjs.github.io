@@ -6,8 +6,13 @@ import { MoonIcon, SunIcon } from "@heroicons/react/outline"
 const themeStorageKey = "blog-theme"
 
 const getTheme = (): "light" | "dark" => {
-  if (typeof window === "undefined") return "dark"
-  return localStorage.getItem(themeStorageKey) as "dark" || (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light")
+  try {
+    return localStorage.getItem(themeStorageKey) as "dark" || (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light")
+  } catch (err) {
+    console.error(err)
+  }
+
+  return "dark"
 }
 
 const setTheme = (mode: "light" | "dark"): void => {
@@ -42,10 +47,10 @@ const ThemeSwitch = () => {
       >
         <MoonIcon
           className={`w-5 h-5 absolute z-10 mx-1 transition-opacity ease-in-out duration-300 ${
-            mode === "dark" ? "opacity-1" : "opacity-0"
+            mode === "dark" ? "opacity-100" : "opacity-0"
           }`}
         />
-        <span className="sr-only">Use setting</span>
+        <span className="sr-only">Switch dark mode</span>
         <span
           aria-hidden="true"
           className={`bg-slate-100 dark:bg-slate-800 pointer-events-none inline-block h-5 w-5 absolute z-20 rounded-full shadow-lg transform ring-0 transition-transform ease-in-out duration-500 ${
@@ -54,7 +59,7 @@ const ThemeSwitch = () => {
         />
         <SunIcon
           className={`w-5 h-5 absolute z-10 right-0 mx-1 transition-opacity ease-in-out duration-300 ${
-            mode !== "dark" ? "opacity-1" : "opacity-0"
+            mode === "dark" ? "opacity-0" : "opacity-100"
           }`}
         />
       </Switch>
