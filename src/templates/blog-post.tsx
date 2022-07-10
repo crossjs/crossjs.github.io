@@ -1,5 +1,6 @@
 import * as React from "react"
 import { PageProps, Link, graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Bio from "@/components/bio"
 import Layout from "@/components/layout"
@@ -11,10 +12,10 @@ interface DataProps {
   site: {
     siteMetadata: SiteMetadata
   }
-  markdownRemark: {
+  mdx: {
     id: string
     excerpt: string
-    html: string
+    body: string
     frontmatter: {
       title: string
       date: string
@@ -43,7 +44,7 @@ const BlogPostTemplate: React.FC<PageProps<DataProps>> = ({
   data,
   location,
 }) => {
-  const post = data.markdownRemark
+  const post = data.mdx
   const { previous, next } = data
 
   return (
@@ -62,10 +63,9 @@ const BlogPostTemplate: React.FC<PageProps<DataProps>> = ({
               {post.frontmatter.date}
             </p>
           </header>
-          <section
-            className="prose prose-slate prose-lg dark:prose-invert"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+          <section className="prose prose-slate prose-lg dark:prose-invert">
+            <MDXRenderer>{post.body}</MDXRenderer>
+          </section>
         </article>
       </main>
       <aside>
@@ -111,17 +111,17 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
+    mdx(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
         description
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
+    previous: mdx(id: { eq: $previousPostId }) {
       fields {
         slug
       }
@@ -129,7 +129,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
+    next: mdx(id: { eq: $nextPostId }) {
       fields {
         slug
       }

@@ -20,14 +20,6 @@ const Layout = ({ location, title, children }: Props) => {
         {children}
         <footer className="flex justify-between mt-12 pt-6">
           &copy; {new Date().getFullYear()} crossjs.com
-          <a
-            className="underline hover:no-underline"
-            href="/rss.xml"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            rss
-          </a>
         </footer>
       </div>
     </div>

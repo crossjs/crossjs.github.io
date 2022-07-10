@@ -10,13 +10,13 @@ interface DataProps {
   site: {
     siteMetadata: SiteMetadata
   }
-  allMarkdownRemark: {
+  allMdx: {
     nodes: Post[]
   }
 }
 
-const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
-  const { nodes: posts } = data.allMarkdownRemark
+const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }: PageProps<DataProps>) => {
+  const { nodes: posts } = data.allMdx
 
   if (posts.length === 0) {
     return (
@@ -74,7 +74,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       nodes {
         excerpt
         fields {

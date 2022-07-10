@@ -1,0 +1,34 @@
+---
+title: Emoji flag symbols
+date: "2022-07-10T05:30:20Z"
+description: "Some Emoji implementations represent combinations of two \"regional indicator\" letters as a single flag symbol."
+---
+
+import { countries } from "@/utils/flag"
+
+  Ref: https://apps.timwhitlock.info/emoji/tables/iso3166
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Country</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+  {countries.map(({ name, code }) => (
+    <tr key={code}>
+      <td>
+        {`${String.fromCodePoint(0x1f1e6 - 65 + code.charCodeAt(0))}${String.fromCodePoint(0x1f1e6 - 65 + code.charCodeAt(1))}`}
+      </td>
+      <td>
+        {name}
+      </td>
+      <td>
+        {code}
+      </td>
+    </tr>
+  ))}
+  </tbody>
+</table>
