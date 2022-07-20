@@ -116,7 +116,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         description
-        date(fromNow: true)
+        date(formatString: "MMMM DD, YYYY")
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {

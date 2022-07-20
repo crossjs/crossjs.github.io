@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { Switch } from "@headlessui/react"
 import { MoonIcon, SunIcon } from "@heroicons/react/outline"
+import { storage } from "@/utils/storage"
+import { mm } from "@/utils/mm"
 
 const themeStorageKey = "blog-theme"
 
 const getTheme = (): "light" | "dark" => {
   try {
-    return localStorage.getItem(themeStorageKey) as "dark" || (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light")
+    return storage.get(themeStorageKey) as "dark" || mm()
   } catch (err) {
     console.error(err)
   }
@@ -17,7 +19,7 @@ const getTheme = (): "light" | "dark" => {
 
 const setTheme = (mode: "light" | "dark"): void => {
   try {
-    localStorage.setItem(themeStorageKey, mode)
+    storage.set(themeStorageKey, mode)
     document.documentElement.classList.toggle("dark", mode === "dark")
   } catch (err) {
     console.error(err)
@@ -25,7 +27,7 @@ const setTheme = (mode: "light" | "dark"): void => {
 }
 
 const ThemeSwitch = () => {
-  const [mode, setMode] = useState(getTheme())
+  const [mode, setMode] = useState(getTheme)
 
   useEffect(() => {
     setTheme(mode)
