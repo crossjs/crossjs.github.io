@@ -27,10 +27,14 @@ const setTheme = (mode: "light" | "dark"): void => {
 }
 
 const ThemeSwitch = () => {
-  const [mode, setMode] = useState(getTheme)
+  const [mode, setMode] = useState<"light" | "dark" | null>(null)
 
   useEffect(() => {
-    setTheme(mode)
+    setMode(getTheme())
+  }, [])
+
+  useEffect(() => {
+    setTheme(mode ?? 'dark')
   }, [mode])
 
   return (
@@ -41,27 +45,27 @@ const ThemeSwitch = () => {
         </script>
       </Helmet>
       <Switch
-        checked={mode === "dark"}
+        checked={mode !== "light"}
         onChange={() => {
-          setMode((v) => v === "dark" ? "light" : "dark")
+          setMode((v) => v === "light" ? "dark" : "light")
         }}
         className="bg-slate-200 dark:bg-slate-700 z-10 relative flex justify-between items-center flex-shrink-0 h-8 w-16 px-1 border-2 border-transparent rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75"
       >
         <MoonIcon
           className={`w-5 h-5 absolute z-10 mx-1 transition-opacity ease-in-out duration-300 ${
-            mode === "dark" ? "opacity-100" : "opacity-0"
+            mode !== "light" ? "opacity-100" : "opacity-0"
           }`}
         />
         <span className="sr-only">Switch dark mode</span>
         <span
           aria-hidden="true"
           className={`bg-slate-100 dark:bg-slate-800 pointer-events-none inline-block h-5 w-5 absolute z-20 rounded-full shadow-lg transform ring-0 transition-transform ease-in-out duration-500 ${
-            mode === "dark" ? "translate-x-8" : "translate-x-0"
+            mode !== "light" ? "translate-x-8" : "translate-x-0"
           }`}
         />
         <SunIcon
           className={`w-5 h-5 absolute z-10 right-0 mx-1 transition-opacity ease-in-out duration-300 ${
-            mode === "dark" ? "opacity-0" : "opacity-100"
+            mode !== "light" ? "opacity-0" : "opacity-100"
           }`}
         />
       </Switch>
