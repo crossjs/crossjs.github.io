@@ -1,6 +1,5 @@
-import * as React from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import ThemeSwitch from "./theme-switch"
-import { ReactNode } from "react"
 import SiteTitle from "./site-title"
 
 interface Props {
@@ -10,6 +9,12 @@ interface Props {
 }
 
 const Layout = ({ location, title, children }: Props) => {
+  const [year, setYear] = useState<number>(new Date().getFullYear());
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-lg transition-colors ease-in-out duration-500">
       <div className="mx-auto max-w-2xl px-6 py-12">
@@ -19,7 +24,7 @@ const Layout = ({ location, title, children }: Props) => {
         </header>
         {children}
         <footer className="flex justify-between mt-12 pt-6">
-          &copy; {new Date().getFullYear()} crossjs.com
+          &copy; {year} crossjs.com
         </footer>
       </div>
     </div>
