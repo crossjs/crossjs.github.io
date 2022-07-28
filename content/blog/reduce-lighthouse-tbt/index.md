@@ -1,7 +1,7 @@
 ---
 title: 快速 TBT 优化
 date: "2022-01-30T08:18:09Z"
-description: "在尽量不改动现有架构的前提下，通过拆分 JS 与异步任务快速降低 TBT，以提高 Lighthouse 评分。"
+description: "通过拆分 JS 与异步任务快速降低 TBT，以提高 Lighthouse 评分。"
 ---
 
 背景知识：[Lighthouse](https://web.dev/performance-scoring/) [TBT](https://web.dev/i18n/zh/lighthouse-total-blocking-time/)。

@@ -8,11 +8,11 @@ interface Props {
 
 const SiteTitle = ({ location, title }: Props) => {
   return location.pathname === `${__PATH_PREFIX__}/` ? (
-    <h1 className="m-0 h-8 whitespace-nowrap text-4xl font-black leading-8">
+    <h1 className="m-0 min-h-[32px] text-4xl font-black leading-10">
       <Link to="/">{title}</Link>
     </h1>
   ) : (
-    <h3 className="m-0 h-8 whitespace-nowrap text-xl font-black leading-10">
+    <h3 className="m-0 min-h-[32px] text-xl font-black leading-10">
       <Link to="/">{title}</Link>
     </h3>
   )
