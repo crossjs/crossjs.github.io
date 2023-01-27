@@ -9,11 +9,11 @@ interface Props {
 }
 
 const Layout = ({ location, title, children }: Props) => {
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const [year, setYear] = useState<number>(new Date().getFullYear())
 
   useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+    setYear(new Date().getFullYear())
+  }, [])
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-lg transition-colors ease-in-out duration-500">
@@ -25,6 +25,13 @@ const Layout = ({ location, title, children }: Props) => {
         {children}
         <footer className="flex justify-between mt-12 pt-6">
           &copy; {year} crossjs.com
+          <a
+            className="flex gap-1"
+            href="/jinja2/"
+            title="Jinja2 2.6 documentation"
+          >
+            🔗 Jinja2
+          </a>
         </footer>
       </div>
     </div>
