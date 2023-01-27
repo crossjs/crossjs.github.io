@@ -1,6 +1,5 @@
 import * as React from "react"
 import { PageProps, Link, graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Bio from "@/components/bio"
 import Layout from "@/components/layout"
@@ -39,10 +38,7 @@ interface DataProps {
   }
 }
 
-const BlogPostTemplate = ({
-  data,
-  location,
-}: PageProps<DataProps>) => {
+const BlogPostTemplate = ({ data, location }: PageProps<DataProps>) => {
   const post = data.mdx
   const { previous, next } = data
 
@@ -63,7 +59,7 @@ const BlogPostTemplate = ({
             </p>
           </header>
           <section className="prose prose-slate prose-lg dark:prose-invert">
-            <MDXRenderer>{post.body}</MDXRenderer>
+            {post.body}
           </section>
         </article>
       </main>
