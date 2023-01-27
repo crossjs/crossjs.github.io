@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
-    "@mdx-js/mdx": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
@@ -20,7 +19,6 @@
     "gatsby-plugin-react-helmet": "^6.5.0",
     "gatsby-plugin-sharp": "^5.5.0",
     "gatsby-plugin-tsconfig-paths": "^1.0.6",
-    "gatsby-plugin-typescript": "^5.5.0",
     "gatsby-remark-copy-linked-files": "^6.5.0",
     "gatsby-remark-images": "^7.5.0",
     "gatsby-remark-prismjs": "^7.5.0",

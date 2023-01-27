@@ -15,13 +15,17 @@ interface DataProps {
   }
 }
 
-const BlogIndex = ({ data, location }: PageProps<DataProps>) => {
-  const { nodes: posts } = data.allMdx
-
+const BlogIndex = ({
+  data: {
+    allMdx: { nodes: posts },
+    site: { siteMetadata },
+  },
+  location,
+}: PageProps<DataProps>) => {
   if (posts.length === 0) {
     return (
-      <Layout location={location} title={data.site.siteMetadata.title}>
-        <Seo title={data.site.siteMetadata.title} />
+      <Layout location={location} title={siteMetadata.title}>
+        <Seo title={siteMetadata.title} />
         <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -33,7 +37,7 @@ const BlogIndex = ({ data, location }: PageProps<DataProps>) => {
   }
 
   return (
-    <Layout location={location} title={data.site.siteMetadata.title}>
+    <Layout location={location} title={siteMetadata.title}>
       <Seo />
       <aside>
         <Bio />
@@ -74,7 +78,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: {order: DESC, fields: frontmatter___date}) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
         fields {
           slug

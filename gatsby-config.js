@@ -13,14 +13,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-typescript`,
-      options: {
-        isTSX: true,
-        jsxPragma: `jsx`,
-        allExtensions: true,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog`,

@@ -11,14 +11,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allMdx(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
+        allMdx(sort: { frontmatter: { date: ASC } }, limit: 1000) {
           nodes {
             id
             fields {
               slug
+            }
+            internal {
+              contentFilePath
             }
           }
         }
@@ -47,7 +47,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
       createPage({
         path: post.fields.slug,
-        component: blogPost,
+        component: `${blogPost}?__contentFilePath=${post.internal.contentFilePath}`,
         context: {
           id: post.id,
           previousPostId,

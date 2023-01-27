@@ -38,34 +38,35 @@ interface DataProps {
   }
 }
 
-const BlogPostTemplate = ({ data, location }: PageProps<DataProps>) => {
-  const post = data.mdx
-  const { previous, next } = data
-
+const BlogPostTemplate = ({
+  data: { mdx, previous, next, site },
+  location,
+  children,
+}: PageProps<DataProps>) => {
   return (
-    <Layout location={location} title={data.site.siteMetadata.title}>
+    <Layout location={location} title={site.siteMetadata.title}>
       <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={mdx.frontmatter.title}
+        description={mdx.frontmatter.description || mdx.excerpt}
       />
       <main>
         <article>
           <header>
             <h1 className="mt-14 mb-7 text-4xl font-black">
-              {post.frontmatter.title}
+              {mdx.frontmatter.title}
             </h1>
             <p className="mb-7 -mt-5 text-sm leading-7">
-              {post.frontmatter.date}
+              {mdx.frontmatter.date}
             </p>
           </header>
           <section className="prose prose-slate prose-lg dark:prose-invert">
-            {post.body}
+            {children}
           </section>
         </article>
       </main>
       <aside>
         <section className="mt-12 mb-4">
-          <SiteTitle location={location} title={data.site.siteMetadata.title} />
+          <SiteTitle location={location} title={site.siteMetadata.title} />
         </section>
         <Bio />
         {(previous || next) && (
@@ -108,7 +109,6 @@ export const pageQuery = graphql`
     }
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
-      body
       frontmatter {
         title
         description

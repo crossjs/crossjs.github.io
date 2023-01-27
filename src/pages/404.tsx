@@ -11,9 +11,14 @@ interface DataProps {
   }
 }
 
-const NotFoundPage = ({ data, location }: PageProps<DataProps>) => {
+const NotFoundPage = ({
+  data: {
+    site: { siteMetadata },
+  },
+  location,
+}: PageProps<DataProps>) => {
   return (
-    <Layout location={location} title={data.site.siteMetadata.title}>
+    <Layout location={location} title={siteMetadata.title}>
       <Seo title="404: Not Found" />
       <h1>404: Not Found</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
